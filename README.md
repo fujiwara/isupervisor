@@ -1,6 +1,6 @@
-# {{ .Project.Name }}
+# isupervisor
 
-{{ .Project.Description }}
+ISUCON supervisor.
 
 ## Usage
 
@@ -8,8 +8,8 @@ isupervisor
 
 ## LICENSE
 
-{{ .Project.License }}
+MIT
 
 ## Author
 
-{{ .Project.Author.Name }} <{{ .Project.Author.Email }}>
+fujiwara
