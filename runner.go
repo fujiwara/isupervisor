@@ -14,7 +14,7 @@ import (
 )
 
 var sleep = time.Second * 1
-var reportTimeout = time.Second * 5
+var ReportTimeout = time.Second * 5
 
 func (isu *Isupervisor) Run(ctx context.Context) error {
 	ticker := time.NewTicker(sleep)
@@ -51,7 +51,7 @@ func (isu *Isupervisor) runJob(ctx context.Context) error {
 	// benchmarkerはctxを継承しない
 	jobCtx, cancelJob := context.WithTimeout(context.Background(), time.Duration(job.SoftTimeout)*time.Second)
 	defer cancelJob()
-	reportCtx, cancelReport := context.WithTimeout(context.Background(), time.Duration(job.HardTimeout)*time.Second+reportTimeout)
+	reportCtx, cancelReport := context.WithTimeout(context.Background(), time.Duration(job.HardTimeout)*time.Second+ReportTimeout)
 	defer cancelReport()
 
 	var cmd *exec.Cmd
