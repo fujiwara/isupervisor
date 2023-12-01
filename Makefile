@@ -1,6 +1,6 @@
 .PHONY: clean test
 
-isupervisor: go.* *.go
+isupervisor: go.* *.go cmd/isupervisor/*.go
 	go build -o $@ cmd/isupervisor/main.go
 
 clean:

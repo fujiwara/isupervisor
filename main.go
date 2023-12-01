@@ -2,7 +2,6 @@ package isupervisor
 
 import (
 	"context"
-	"log"
 )
 
 const (
@@ -40,10 +39,4 @@ type Result struct {
 	Finished bool  `json:"finished"`
 	Passed   bool  `json:"passed"`
 	Score    int64 `json:"score"`
-}
-
-func Run(ctx context.Context) error {
-	log.Println("[info] Starting isupervisor...")
-	isu := &Isupervisor{}
-	return isu.Run(ctx)
 }

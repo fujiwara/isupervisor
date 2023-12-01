@@ -35,7 +35,7 @@ func (isu *Isupervisor) runJob(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("failed to recieve job: %w", err)
 	}
-	log.Println("[info] Recieved job:", job)
+	log.Printf("[info] Recieved job: %+v", job)
 	report := &Report{
 		Job:    job,
 		Status: StatusRunning,
@@ -73,6 +73,7 @@ func (isu *Isupervisor) runJob(ctx context.Context) error {
 		return cmd.Process.Signal(os.Interrupt)
 	}
 	cmd.WaitDelay = time.Duration(job.HardTimeout-job.SoftTimeout) * time.Second
+	log.Println("[info] Start job:", report.Job.ID)
 
 	if err = cmd.Run(); err != nil {
 		report.ExitCode = wrapcommander.ResolveExitCode(err)
@@ -88,7 +89,7 @@ func (isu *Isupervisor) runJob(ctx context.Context) error {
 			log.Println("[error] Error while unmarshaling result file:", err)
 		}
 	}
-	log.Println("[info] Finished job:", report)
+	log.Println("[info] Finished job:", report.Job.ID)
 
 	if err := isu.Report(reportCtx, report); err != nil {
 		log.Println("[error] Error while sending report:", err)
